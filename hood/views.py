@@ -3,7 +3,7 @@ from .models import Neighborhood, Profile, Post, Business
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import ProfileForm,NeighborhoodForm
+from .forms import ProfileForm,NeighborhoodForm,BusinessForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login')
@@ -86,6 +86,38 @@ def business(request, id):
     hoods = Neighborhood.objects.filter(id=id)
     print(posts)
     return render(request, 'business.html', {'businesses': businesses, 'posts': posts, 'hoods': hoods})
+
+
+@login_required(login_url='/accounts/login')
+def add_business(request, id):
+    current_user = request.user
+    try:
+        profile = Profile.objects.get(user_id=request.user.id)
+    except ObjectDoesNotExist:
+        return redirect(update_profile, current_user.id)
+    current_neighborhood = Neighborhood.objects.get(id=id)
+    print(current_neighborhood)
+    current_user = request.user
+    form = BusinessForm()
+
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            print(business)
+            business.user_id = request.user.id
+            business.business_user = current_user
+            business.business_neighborhood = current_neighborhood
+
+            business.save()
+
+        return redirect('business', id)
+
+    else:
+        form = BusinessForm()
+
+    return render(request, 'add_business.html', {"current_neighborhood": current_neighborhood, "form": form})
+
 
 
 
