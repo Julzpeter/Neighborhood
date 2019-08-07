@@ -9,5 +9,6 @@ urlpatterns=[
     url(r'^neighborhood/(\d+)$', views.neighborhood, name='neighborhood'),
     url(r'^business/(\d+)$', views.business, name='business'),
     url(r'^add/business/(\d+)$', views.add_business, name='add-business'),
-
+    url(r'^post/(/d+)$',views.post,name='post'),
+    
 ]
