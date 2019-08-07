@@ -19,7 +19,7 @@ def profile(request,id):
     current_user = request.user
     user = User.objects.get(id=id)
     hoods = Neighborhood.filter(id=id)
-    posts = Post.obbjects.filter(user_id=id)
+    posts = Post.objects.filter(user_id=id)
     try:
         profile = Profile.objects.get(user_id=id)
     except ObjectDoesNotExist:
