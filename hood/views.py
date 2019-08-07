@@ -3,6 +3,7 @@ from .models import Neighborhood, Profile, Post, Business
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from .forms import ProfileForm,NeighborhoodForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login')
@@ -44,6 +45,24 @@ def update_profile(request, id):
     else:
         form = ProfileForm()
     return render(request, 'update_profile.html', {"user": user, "form": form})
+
+@login_required(login_url='/accounts/login/')
+def join(request,id):
+    current_user = request.user
+    form = NeighborhoodForm()
+
+    if request.method == 'POST':
+        form = NeighborhoodForm(request.POST,request.FILES)
+        if form.is_valid():
+            neighborhood = form.save(commit=False) 
+            print(neighborhood)
+            neighborhood.user_id = request.user.id
+            neighborhood.save()
+        return redirect(home)
+    else:
+        form = NeighborhoodForm()
+    return render(request, 'neighborhood.html', {"user":current_user,"form":form})
+
 
 
 
