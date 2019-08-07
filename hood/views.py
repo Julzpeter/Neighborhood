@@ -74,6 +74,25 @@ def neighborhood(request,id):
         return redirect(index_html,current_user.id)
     return render(request,'index.html',{"user":user,"name":name,"neighborhood":neighborhood,"current_neighborhood":current_neighborhood})
 
+@login_required(login_url='/accounts/login')
+def business(request, id):
+    try:
+        neighborhood = Neighborhood.objects.get(id=id)
+    except ObjectDoesNotExist:
+        return redirect (index_html, current_user.id)
+
+    businesses = Business.objects.filter(business_neighborhood_id=id)
+    posts = Post.objects.filter(location_id=id)
+    hoods = Neighborhood.objects.filter(id=id)
+    print(posts)
+    return render(request, 'business.html', {'businesses': businesses, 'posts': posts, 'hoods': hoods})
+
+
+
+
+
+
+
 
 
 
