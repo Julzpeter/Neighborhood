@@ -170,7 +170,10 @@ def leave(request):
     current_user = request.user
     return redirect('home')
 
-    
+
+def signout(request):
+    logout(request)
+    return redirect('login')
 
 
 
