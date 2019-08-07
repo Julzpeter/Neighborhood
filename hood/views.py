@@ -28,5 +28,24 @@ def profile(request,id):
         return render(request, 'profile.html', {"user": user, "profile": profile, 'hoods': hoods, "posts": posts})
 
 
+@login_required(login_url='/accounts/login/')
+def update_profile(request, id):
+    current_user = request.user
+    user = User.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user_id = request.user.id
+            profile.save()
+        return redirect(home)
+
+    else:
+        form = ProfileForm()
+    return render(request, 'update_profile.html', {"user": user, "form": form})
+
+
+
 
 
