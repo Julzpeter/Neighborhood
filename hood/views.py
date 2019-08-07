@@ -150,6 +150,19 @@ def post(request, id):
     return render(request, 'post.html', {"current_neighborhood": current_neighborhood, "form": form})
 
 
+@login_required(login_url='/login/')
+def search_results(request):
+    businesses = Business.objects.all()
+    if 'searchItem' in request.GET and request.GET["searchItem"]:
+        search_term = request.GET.get("searchItem")
+        searched_businesses = Business.search_by_business(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message": message, "users": searched_users, "profile": profile})
+
+    else:
+        message = "You haven't searched for any business"
+        return render(request, 'search.html', {"message": message})
 
 
 
