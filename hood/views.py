@@ -63,6 +63,18 @@ def join(request,id):
         form = NeighborhoodForm()
     return render(request, 'neighborhood.html', {"user":current_user,"form":form})
 
+@login_required(login_url='/accounts/login')
+def neighborhood(request,id):
+    user = User.objects.get(id=id)
+    current_user = request.user
+    name = Neighborhood.objects.filter(id=id)
+    try:
+        neighorhood = Neighborhood.objects.geet(neighborhood_id=id)
+    except ObjectDoesNotExist:
+        return redirect(index_html,current_user.id)
+    return render(request,'index.html',{"user":user,"name":name,"neighborhood":neighborhood,"current_neighborhood":current_neighborhood})
+
+
 
 
 
