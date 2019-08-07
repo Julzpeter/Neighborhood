@@ -6,5 +6,6 @@ urlpatterns=[
     url(r'^profile/(\d+)$',views.profile,name='profile'),
     url(r'^update/profile/(\d+)$',views.update_profile,name='update_profile'),
     url(r'^join/(\d+)$', views.join, name='join'),
+    url(r'^neighborhood/(\d+)$', views.neighborhood, name='neighborhood'),
 
 ]
