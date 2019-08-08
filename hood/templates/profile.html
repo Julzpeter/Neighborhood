@@ -1,65 +1,75 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block content %}
-{{ block.super}}
 
+<div class="container">
+    <br>
+    <div class="row">
+        <br>
+        <br>
 
-
-<body>
-    <div style="margin-top:100px;background-color: white" class="container">
-        <div clas="row">
-
-            <div class="col-md-4 col-sm-4 col-xs-8">
-                <img style="border-radius:100px;height:200px;width:200px;margin-top:20px"
-                    src="{{profile.profile_pic.url}}" class="img-responsive" alt="Image">
-
-
-                <hr>
-                <h3><b>{{user.username}}</b></h3>
-                <hr>
-
-                <p class="bio"><b>Bio</b> {{profile.bio }}</p>
-                <hr>
-                <p><b>Contact</b> {{profile.contact}}</p>
-                <hr>
-                {% if request.user == user %}
-                <p class="btn btn-info"> <a style=" text-decoration:none;color:white" ;
-                        href="{% url 'update_profile' user.id %}">Edit profile</a></p>
-                {% else %}
-
-                {% endif %}
+        <div class="col-sm-4 col-md-4 col-xs-1">
+            <div class="media">
+                <img style="border-radius:150px;width:150px;height:150px" class="rounded-circle"
+                    src="{{ user.profile.profile_pic.url }}">
             </div>
+        </div>
 
-            <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="col-sm-6 col-md-4 col-xs-10">
 
-                <h4 class="text-center"><strong>Projects</strong></h4>
-                <hr>
-                {% for project in projects %}
-                <div class="col-xs-8 col-sm-6 col-md-4 col-lg-4 ">
-                    <div class="user-projs">
-                        <img style="margin:13px;height:200px;width:200px;" src="{{project.screenshot.url}}"
-                            class="img-responsive" alt="Image">
-                        <p>{{project.sitename}}</p>
-                    </div>
 
-                </div>
+            <div class="media-body">
+                <h2 style="color: #004040;" class="account-heading">{{ user.username }}</h2>
+                <br>
+                <a style="background-color: #004040; color: white" class="btn btn-outline-info"
+                    href="/update/profile/{{hood.id}}">Edit Profile</a>
 
-                {% endfor %}
+                <br>
+                <br>
+
+                <p style="color: #004040;"><b>About
+                        me:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    {{profile.bio}}
+                </p>
+
 
             </div>
         </div>
-        <hr>
     </div>
-    <div style="background-color: white" class="container">
+    <br>
+    <br>
+    <hr>
+    <p style="text-align:center; color: #007E7F;">YOUR ANNOUNCEMENTS</p>
+    <hr>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-sm-4 col-sm-4 col-sm-1">
+
+            <div style="height: 104.67%; width:104.67%;" class="card">
+                <img src="{{post.post_image.url}}" class="img-thumbnail" style="height: 240px !important"
+                    data-toggle="modal" data-target="#myModal{{post_image.id}}" alt="" />
 
 
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+
+                <ul style="color: #007E7F;" class="list-group list-group-flush">
+
+                    <li class="list-group-item">{{post.categories}}</li>
 
 
+                    <li class="list-group-item">Description:&nbsp; {{post.description}}</li>
+                    <li class="list-group-item">{{post.time_created}}</li>
+                </ul>
+            </div>
 
         </div>
-        <div class="col-md-2"></div>
+        {%endfor%}
     </div>
 
-</body>
+</div>
+
+
+
+
 {% endblock %}
