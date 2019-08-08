@@ -1,1 +1,34 @@
-<h1>Home Page</h1>
+{%extends "base.html"%}
+{% load bootstrap4 %}
+
+{% block content %}
+
+
+<div class="container">
+
+    <body>
+        <div class="row">
+            {% for hood in hoods %}
+            <div class="col-sm-4 col-md-4 col-sm-4">
+                <br>
+                <br>
+                <div class="card  shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
+                    <br>
+                    <div class="card-body">
+                        <p style="color:#007E7F;" class="card-text"><b>{{hood.name}}</b></p>
+                        <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
+                                style="color:#007E7F; text-decoration: none;"
+                                href="{% url 'business' hood.id %}"><b>Join
+                                    Neighborhood</b>
+                        </p></a>
+                    </div>
+                </div>
+
+            </div>
+
+            {% endfor %}
+        </div>
+    </body>
+
+</div>
+{% endblock %}
