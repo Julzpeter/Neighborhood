@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import ProfileForm,NeighborhoodForm,BusinessForm,PostForm
 
 # Create your views here.
-@login_required(login_url='/accounts/login')
+# @login_required(login_url='/accounts/login')
 def home(request):
     current_user = request.user
     hoods = Neighborhood.objects.all()
@@ -18,14 +18,14 @@ def home(request):
 def profile(request,id):
     current_user = request.user
     user = User.objects.get(id=id)
-    hoods = Neighborhood.filter(id=id)
+    hoods = Neighborhood.objects.filter(id=id)
     posts = Post.objects.filter(user_id=id)
     try:
         profile = Profile.objects.get(user_id=id)
     except ObjectDoesNotExist:
         return redirect(update_profile, current_user.id)
     else:
-
+        
         return render(request, 'profile.html', {"user": user, "profile": profile, 'hoods': hoods, "posts": posts})
 
 
@@ -71,20 +71,23 @@ def neighborhood(request,id):
     try:
         neighorhood = Neighborhood.objects.geet(neighborhood_id=id)
     except ObjectDoesNotExist:
-        return redirect(index_html,current_user.id)
-    return render(request,'index.html',{"user":user,"name":name,"neighborhood":neighborhood,"current_neighborhood":current_neighborhood})
+        return redirect(home,current_user.id)
+    return render(request,'index.html',{"user":user,"name":name,"neighborhood":neighborhood,"current_neighborhood":name})
 
 @login_required(login_url='/accounts/login')
 def business(request, id):
-    try:
-        neighborhood = Neighborhood.objects.get(id=id)
-    except ObjectDoesNotExist:
-        return redirect (index_html, current_user.id)
+    
 
     businesses = Business.objects.filter(business_neighborhood_id=id)
     posts = Post.objects.filter(location_id=id)
     hoods = Neighborhood.objects.filter(id=id)
     print(posts)
+
+    try:
+        neighborhood = Neighborhood.objects.get(id=id)
+    except ObjectDoesNotExist:
+        return redirect(home, businesses.id)
+    
     return render(request, 'business.html', {'businesses': businesses, 'posts': posts, 'hoods': hoods})
 
 
@@ -158,7 +161,7 @@ def search_results(request):
         searched_businesses = Business.search_by_business(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search.html', {"message": message, "users": searched_users, "profile": profile})
+        return render(request, 'search.html', {"message": message, "users": searched_businesses, "profile": profile})
 
     else:
         message = "You haven't searched for any business"
@@ -172,7 +175,7 @@ def leave(request):
 
 
 def signout(request):
-    logout(request)
+    # logout(request)
     return redirect('login')
 
 
