@@ -22,7 +22,7 @@ class Neighborhood(models.Model):
 
     @classmethod
     def find_neighborhood_by_id(cls,id):
-        neighborhood_reuslt = cls.objects.get(id=id)
+        neighborhood_result = cls.objects.get(id=id)
         return neighborhood_result
 
     @classmethod
@@ -77,7 +77,8 @@ class Profile(models.Model):
             return  self.profile_pic.url 
     @classmethod
     def search_by_username(cls,search_term):
-        serach_result = cls.objects.filter(user__username__icontains=search_term)
+        search_result = cls.objects.filter(
+            user__username__icontains=search_term)
         return search_result
 
     def save_profile(self):
