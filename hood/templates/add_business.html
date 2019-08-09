@@ -6,8 +6,7 @@
 <br>
 <div class="container">
 
-    <body style="background-size: cover;"
-        background="https://cdn.pixabay.com/photo/2015/03/26/10/34/houses-691586_960_720.jpg">
+    <body>
         <div class="row">
             <div class="col-sm-2 col-md-4 "></div>
             <div class="col-sm-8 col-md-4 col-sm-4; shadow-lg p-3 mb-5 bg-white rounded">
@@ -17,8 +16,7 @@
                 <br>
                 <br>
 
-                <form action="{%url 'add-business' current_neighborhood.id%}" method="post"
-                    enctype="multipart/form-data">
+                <form action="{%url 'add-business' current_neighborhood.id%}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% bootstrap_form form%}
                     <br>
