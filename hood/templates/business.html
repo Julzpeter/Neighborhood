@@ -4,7 +4,8 @@
 {% block content %}
 <div class="container">
 
-    <body>
+    <body style="background-size: cover;"
+        background="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
         <br>
         <br>
 
@@ -13,30 +14,30 @@
             <div class="col-sm-3 col-md-3 col-xs-3 ">
                 {% for hood in hoods %}
 
-                <div class="card  shadow-lg p-3 mb-5 bg-white rounded">
-                    <h1 style="font: bolder; font-size: 20px; text-align: center; color:#007E7F;"></h1>
+                <div class="card  shadow-lg p-3 mb-5 bg-black rounded">
+                    <h1 style="font: bolder; font-size: 20px; text-align: center; color:black;"></h1>
                     <ul style="text-align: left;" class="list-group list-group-flush">
 
-                        <p style="color:#007E7F; text-decoration: none; font-size: 30px; font: bolder;"
+                        <p style="color:black; text-decoration: none; font-size: 30px; font: bolder;"
                             class="card-text"><b>{{hood.name}}&nbsp;</b></p>
 
 
                         <li class="list-group-item">
-                            <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
-                                    style="color:#007E7F; text-decoration: none;"
+                            <p style="color:black; text-decoration: none;" class="card-text"> <a
+                                    style="color:black; text-decoration: none;"
                                     href="{%url 'add-business' hood.id%}"><b>Add
                                         Business</b></a></p>
                         </li>
                         <li class="list-group-item">
-                            <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
-                                    style="color:#007E7F; text-decoration: none;" href="{%url 'post' hood.id%}"><b>Add
+                            <p style="color:black; text-decoration: none;" class="card-text"> <a
+                                    style="color:black; text-decoration: none;" href="{%url 'post' hood.id%}"><b>Add
                                         Post</b></a></p>
                             
                         </li>
 
                         <li class="list-group-item">
-                            <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
-                                    style="color:#007E7F; text-decoration: none;" href="{% url 'leave' %}"><b>Leave
+                            <p style="color:black; text-decoration: none;" class="card-text"> <a
+                                    style="color:black; text-decoration: none;" href="{% url 'leave' %}"><b>Leave
                                         Neighborhood</b></a>
                             </p>
                         </li>
@@ -44,12 +45,12 @@
                     <li class="list-group-item">
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#"
-                                style="text-decoration: none; color:#007E7F; border: none;" role="button"
+                                style="text-decoration: none; color:black; border: none;" role="button"
                                 data-toggle="dropdown">
                                 <b>Police Address</b>
                             </a>
                             <div class="dropdown-menu">
-                                <p style="color: #007E7F; font: bolder" class="dropdown-item" href="#">{{hood.police}}
+                                <p style="color: black; font: bolder" class="dropdown-item" href="#">{{hood.police}}
                                     &nbsp; - &nbsp;
                                     {{hood.police_department_address}}
                                 </p>
@@ -58,12 +59,12 @@
                     </li>
                     <li class="list-group-item">
                         <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" style="text-decoration: none; color:#007E7F;"
+                            <a class="dropdown-toggle" href="#" style="text-decoration: none; color:black;"
                                 role="button" data-toggle="dropdown">
                                 <b>HealthCare Address</b>
                             </a>
                             <div class="dropdown-menu">
-                                <p style="color: #007E7F; font: bolder" class="dropdown-item">{{hood.health}} &nbsp; -
+                                <p style="color: black; font: bolder" class="dropdown-item">{{hood.health}} &nbsp; -
                                     &nbsp;
                                     {{hood.health_department_address}}
                                 </p>
@@ -81,13 +82,13 @@
 
 
                 {% for post in posts %}
-                <div class="card  shadow-lg p-3 mb-5 bg-white rounded">
-                    <h1 style="font: bolder; font-size: 30px; text-align: center; color:#007E7F">POST</h1>
+                <div class="card  shadow-lg p-3 mb-5 bg-black rounded">
+                    <h1 style="font: bolder; font-size: 30px; text-align: center; color:black">POST</h1>
 
-                    <ul style="color: #007E7F;" class="list-group list-group-flush">
+                    <ul style="color: black;" class="list-group list-group-flush">
 
 
-                        <p><img style="border-radius:30px;width:30px;height:30px; background-color:white;"
+                        <p><img style="border-radius:30px;width:30px;height:30px; background-color:black;"
                                 class="rounded-circle" src="{{post.user_profile.profile_pic.url }}"> &nbsp;
                             &nbsp;{{ post.user_profile.user }}</p>
 
@@ -109,12 +110,12 @@
 
             <div class="col-sm-3 col-md-3 col-xs-3 ">
                 {% for business in businesses %}
-                <div class="card  shadow-lg p-3 mb-5 bg-white rounded ">
-                    <h1 style="font: bolder; font-size: 20px; text-align: center; color: #007E7F">BUSINESS AROUND</h1>
+                <div class="card  shadow-lg p-3 mb-5 bg-black rounded ">
+                    <h1 style="font: bolder; font-size: 20px; text-align: center; color: black">BUSINESS AROUND</h1>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <p style="color: #007E7F;"><b>NAME:</b>&nbsp;{{business.business_name}}</p>
-                            <p style="color: #007E7F;"><b>EMAIL:</b>&nbsp;{{business.business_email}}</p>
+                            <p style="color: blackF;"><b>NAME:</b>&nbsp;{{business.business_name}}</p>
+                            <p style="color: black;"><b>EMAIL:</b>&nbsp;{{business.business_email}}</p>
                         </li>
                     </ul>
                 </div>
