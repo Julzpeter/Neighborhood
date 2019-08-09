@@ -73,4 +73,55 @@
                 </div>
                 {% endfor%}
             </div>
-            {%endblock%}
+
+
+
+            <div class="col-sm-6 col-md-6 col-xs-6">
+
+
+                {% for post in posts %}
+                <div class="card  shadow-lg p-3 mb-5 bg-white rounded">
+                    <h1 style="font: bolder; font-size: 30px; text-align: center; color:#007E7F">POST</h1>
+
+                    <ul style="color: #007E7F;" class="list-group list-group-flush">
+
+
+                        <p><img style="border-radius:30px;width:30px;height:30px; background-color:white;"
+                                class="rounded-circle" src="{{post.user_profile.profile_pic.url }}"> &nbsp;
+                            &nbsp;{{ post.user_profile.user }}</p>
+
+                        <br>
+                        <li class="list-group-item">{{post.categories}}</li>
+                        <li class="list-group-item">
+                        <li style="height: 250%; width:100%;" class="card">
+                            <img src="{{post.post_image.url}}" class="img-thumbnail" style="height: 240px !important"
+                                data-toggle="modal" data-target="#myModal{{image.id}}" alt="" /></li>
+
+                        <li class="list-group-item">Description:&nbsp; {{post.description}}</li>
+                        <li class="list-group-item">{{post.time_created}}</li>
+                    </ul>
+
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="col-sm-3 col-md-3 col-xs-3 ">
+                {% for business in businesses %}
+                <div class="card  shadow-lg p-3 mb-5 bg-white rounded ">
+                    <h1 style="font: bolder; font-size: 20px; text-align: center; color: #007E7F">BUSINESS AROUND</h1>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <p style="color: #007E7F;"><b>NAME:</b>&nbsp;{{business.business_name}}</p>
+                            <p style="color: #007E7F;"><b>EMAIL:</b>&nbsp;{{business.business_email}}</p>
+                        </li>
+                    </ul>
+                </div>
+                {%endfor%}
+            </div>
+
+        </div>
+
+    </body>
+</div>
+{% endblock %}
