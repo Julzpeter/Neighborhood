@@ -3,12 +3,22 @@
 
 {% block content %}
 
+<style>
+    h2 {
+        font-family: 'Akronim', cursive;
+        font-size: 50px;
+        text-align: center;
+        text-decoration: underline;
+        color: black;
 
+    }
+</style>
 <div class="container">
 
     <body style="background-size: cover;"
         background="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
         <br>
+        <h2> Welcome to the Neighborhood</h2>
         <div class="row">
             {% for hood in hoods %}
             <div class="col-sm-4 col-md-4 col-sm-4">
