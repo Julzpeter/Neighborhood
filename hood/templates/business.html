@@ -1,0 +1,76 @@
+{%extends "base.html"%}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+
+    <body>
+        <br>
+        <br>
+
+        <div class="row">
+
+            <div class="col-sm-3 col-md-3 col-xs-3 ">
+                {% for hood in hoods %}
+
+                <div class="card  shadow-lg p-3 mb-5 bg-white rounded">
+                    <h1 style="font: bolder; font-size: 20px; text-align: center; color:#007E7F;"></h1>
+                    <ul style="text-align: left;" class="list-group list-group-flush">
+
+                        <p style="color:#007E7F; text-decoration: none; font-size: 30px; font: bolder;"
+                            class="card-text"><b>{{hood.name}}&nbsp;</b></p>
+
+
+                        <li class="list-group-item">
+                            <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
+                                    style="color:#007E7F; text-decoration: none;"
+                                    href="{%url 'add-business' hood.id%}"><b>Add
+                                        Business</b></a></p>
+                        </li>
+                        <li class="list-group-item">
+                            <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
+                                    style="color:#007E7F; text-decoration: none;" href="{%url 'post' hood.id%}"><b>Add
+                                        Post</b></a></p>
+                        </li>
+
+                        <li class="list-group-item">
+                            <p style="color:#007E7F; text-decoration: none;" class="card-text"> <a
+                                    style="color:#007E7F; text-decoration: none;" href="{% url 'leave' %}"><b>Leave
+                                        Neighborhood</b></a>
+                            </p>
+                        </li>
+                    </ul>
+                    <li class="list-group-item">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#"
+                                style="text-decoration: none; color:#007E7F; border: none;" role="button"
+                                data-toggle="dropdown">
+                                <b>Police Address</b>
+                            </a>
+                            <div class="dropdown-menu">
+                                <p style="color: #007E7F; font: bolder" class="dropdown-item" href="#">{{hood.police}}
+                                    &nbsp; - &nbsp;
+                                    {{hood.police_department_address}}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" style="text-decoration: none; color:#007E7F;"
+                                role="button" data-toggle="dropdown">
+                                <b>HealthCare Address</b>
+                            </a>
+                            <div class="dropdown-menu">
+                                <p style="color: #007E7F; font: bolder" class="dropdown-item">{{hood.health}} &nbsp; -
+                                    &nbsp;
+                                    {{hood.health_department_address}}
+                                </p>
+                            </div>
+                        </div>
+
+                    </li>
+                </div>
+                {% endfor%}
+            </div>
+            {%endblock%}
