@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
-from .models import Neighborhood, Profile, Post, Business
+from .models import Neighborhood, Profile, Post, Business,HoodRecipients
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import ProfileForm,NeighborhoodForm,BusinessForm,PostForm
-
+from .forms import ProfileForm,NeighborhoodForm,BusinessForm,PostForm,HoodForm
+from .email import send_welcome_email
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 # Create your views here.
 # @login_required(login_url='/accounts/login')
 def home(request):
@@ -12,7 +13,21 @@ def home(request):
     hoods = Neighborhood.objects.all()
     profile = Profile.objects.all()
     print(profile)
-    return render(request, 'index.html',{'hoods':hoods})
+    if request.method == 'POST':
+        form = HoodForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+            recipient = HoodRecipients(name=name, email=email)
+            recipient.save()
+            send_welcome_email(name, email)
+
+            HttpResponseRedirect('home')
+            # return redirect('business')
+            print('valid')
+    else:
+        form = HoodForm()
+    return render(request, 'index.html',{'hoods':hoods,"letterForm":form})
 
 @login_required(login_url='/accounts/login')
 def profile(request,id):
