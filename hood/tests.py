@@ -42,7 +42,7 @@ class Neighborhood_TestCases(TestCase):
     def test_display_all_objects_method(self):
         self.neighborhood.create_neighborhood()
         all_objects = Neighborhood.retrieve_all()
-        self.assertEqual(all_objects.name, 'eazy')
+        self.assertEqual(all_objects.name, 'Uber')
 
     def test_update_single_object_property(self):
         self.neighborhood.create_neighborhood()
