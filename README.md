@@ -159,7 +159,7 @@ Email: chepngetichjuliet@gmail.com
 
 
 ##  MIT LiCENSE
-[MIT]()
+[MIT](https://github.com/Julzpeter/Neighborhood/blob/master/LICENSE)
 
 
 
